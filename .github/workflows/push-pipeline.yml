@@ -1,0 +1,14 @@
+name: "Push on develop"
+
+on:
+    push:
+        branches:
+            - develop
+    workflow_dispatch:
+
+jobs:
+    has-pushed:        
+        runs-on: ubuntu-latest
+        steps:
+            - name: "Has pusheado"
+              run: echo "Has hecho push"
