@@ -1,7 +1,9 @@
 name: "Build Pipeline"
 
 on:
-    push:
+    pull_request:
+        types:
+            - closed
         branches:
             - main
     workflow_dispatch:
@@ -14,3 +16,12 @@ jobs:
               uses: actions/checkout@v5
             - name: "View all files"
               run: ls -la
+            - name: "Configurar Java y caché de Maven"
+              uses: actions/setup-java@v5
+              with:
+                java-version: '17' 
+                distribution: 'temurin'
+                cache: 'maven' 
+
+            - name: "Construir el proyecto con Maven"
+              run: mvn clean install -DskipTests 
